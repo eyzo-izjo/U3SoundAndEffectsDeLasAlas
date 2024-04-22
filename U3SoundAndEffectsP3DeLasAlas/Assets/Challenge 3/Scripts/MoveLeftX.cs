@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveLeftX : MonoBehaviour
@@ -18,8 +19,13 @@ public class MoveLeftX : MonoBehaviour
     void Update()
     {
         // If game is not over, move to the left
-        if (playerControllerScript.gameOver)
+        if (!playerControllerScript.gameOver)
         {
+            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+        }
+        else
+        {
+            speed = 0;
             transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
         }
 
@@ -27,6 +33,7 @@ public class MoveLeftX : MonoBehaviour
         if (transform.position.x < leftBound && !gameObject.CompareTag("Background"))
         {
             Destroy(gameObject);
+            
         }
 
     }
